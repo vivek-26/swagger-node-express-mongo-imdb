@@ -1,0 +1,57 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Movies/TV API
+host: 'localhost:10010'
+basePath: /v1
+schemes:
+  - http
+  - https
+paths:
+  '/movie/{movieID}':
+    x-swagger-router-controller: getMovieById
+    get:
+      summary: Gets a movie by ID.
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchMovieById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the movie to get.
+      responses:
+        '200':
+          description: Movie Details
+          schema:
+            $ref: '#/definitions/MovieDetailsByID'
+        '400':
+          description: Bad request. Malformed Restaurant ID.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: A restaurant with the specified ID was not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
+  /swagger:
+    x-swagger-pipe: swagger_raw
+definitions:
+  MovieDetailsByID:
+    type: object
+    properties:
+      result:
+        type: object
+        description: Movie Details
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+        description: Error description in detail

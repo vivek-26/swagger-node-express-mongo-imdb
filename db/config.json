@@ -1,0 +1,7 @@
+{
+   "host": "ec2-35-154-128-19.ap-south-1.compute.amazonaws.com",
+   "port": "27017",
+   "database": "movies",
+   "username": "movieReader",
+   "password": "lhJAFtH7V"
+}
