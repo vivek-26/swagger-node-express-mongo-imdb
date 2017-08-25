@@ -5,6 +5,11 @@ var app = require('express')();
 var mongodb = require('./db/mongo');
 module.exports = app; // for testing
 
+// SwaggerUI
+var swaggerTools = require('swagger-tools');
+var YAML = require('yamljs');
+var swaggerDoc = YAML.load('./api/swagger/swagger.yaml');
+
 var config = {
    appRoot: __dirname // required config
 };
@@ -19,8 +24,13 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
    var port = process.env.PORT || 10010;
 
-   // Connect to MongoDB first and then listen for requests
-   createConnection(port);
+   swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
+      // Serve the Swagger documents and Swagger UI
+      app.use(middleware.swaggerUi());
+
+      // Connect to MongoDB first and then listen for requests
+      createConnection(port);
+   });
 });
 
 /**
