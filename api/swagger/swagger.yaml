@@ -11,7 +11,7 @@ paths:
   '/movie/{movieID}':
     x-swagger-router-controller: getMovieById
     get:
-      summary: Gets a movie by ID.
+      summary: GET MOVIE DETAILS BY ID
       tags:
         - Movies
       produces:
@@ -22,18 +22,14 @@ paths:
           name: movieID
           type: string
           required: true
-          description: ID of the movie to get.
+          description: ID of the featured movie to get
       responses:
         '200':
           description: Movie Details
           schema:
             $ref: '#/definitions/MovieDetailsByID'
-        '400':
-          description: Bad request. Malformed Restaurant ID.
-          schema:
-            $ref: '#/definitions/Error'
         '404':
-          description: A restaurant with the specified ID was not found.
+          description: A movie with the specified ID was not found!
           schema:
             $ref: '#/definitions/Error'
         default:
@@ -45,10 +41,91 @@ paths:
 definitions:
   MovieDetailsByID:
     type: object
+    required:
+      - _id
+      - MovieID
+      - SeriesType
+      - Genres
+      - RunningTime
     properties:
-      result:
+      _id:
+        type: string
+      MovieID:
+        type: string
+      SeriesID:
+        type: string
+      SeriesType:
+        type: string
+      SeriesEndYear:
+        type: string
+      ReleaseYear:
+        type: string
+      AltTitles:
+        type: array
+        items:
+          type: string
+      Business:
         type: object
-        description: Movie Details
+        properties:
+          Budget:
+            type: string
+          BudgetCurrency:
+            type: string
+          HighGBO:
+            type: string
+          HighGBOCountry:
+            type: string
+          HighGBOCurrency:
+            type: string
+      Parental:
+        type: object
+        properties:
+          Certificates:
+            type: array
+            items:
+              type: string
+      Technical:
+        type: object
+        properties:
+          Colors:
+            type: array
+            items:
+              type: string
+          Sounds:
+            type: array
+            items:
+              type: string
+      Countries:
+        type: array
+        items:
+          type: string
+      Genres:
+        type: array
+        items:
+          type: string
+      Keywords:
+        type: array
+        items:
+          type: string
+      Languages:
+        type: array
+        items:
+          type: string
+      Locations:
+        type: array
+        items:
+          type: string
+      Rating:
+        type: object
+        properties:
+          RatingDist:
+            type: string
+          Rating:
+            type: string
+          RatingVotes:
+            type: string
+      RunningTime:
+        type: string
   Error:
     type: object
     properties:

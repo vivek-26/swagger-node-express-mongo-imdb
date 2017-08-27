@@ -17,9 +17,7 @@ function fetchMovieById(req, res) {
             error: err.message
          });
       }
-      return res.json({
-         result: movie
-      });
+      return res.json(movie);
    });
 };
 
