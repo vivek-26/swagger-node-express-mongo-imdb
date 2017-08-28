@@ -8,6 +8,9 @@ module.exports = app; // for testing
 // Swagger UI
 var swaggerUi = require('swagger-tools/middleware/swagger-ui');
 
+// UUID Timestamp
+var uuidTimestamp = require('uuid/v1');
+
 var config = {
    appRoot: __dirname // required config
 };
@@ -19,7 +22,13 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
 
    // Serve the Swagger documents and Swagger UI
    app.use(swaggerUi(swaggerExpress.runner.swagger));
-   
+
+   // Middleware to UUID Timestamp to Express Request Object
+   app.use(function (req, res, next) {
+      req.uuidTimestamp = uuidTimestamp();
+      next();
+   });
+
    // install middleware
    swaggerExpress.register(app);
 
