@@ -1,0 +1,7 @@
+{
+   "key": "movies/tv api",
+   "type": "rotating-file",
+   "path": "logs/api.log",
+   "period": "1m",
+   "backup_files": 5
+}

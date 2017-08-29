@@ -11,6 +11,9 @@ var swaggerUi = require('swagger-tools/middleware/swagger-ui');
 // UUID Timestamp
 var uuidTimestamp = require('uuid/v1');
 
+// Bunyan Logger
+var bunyan = require('./logger/bunyan');
+
 var config = {
    appRoot: __dirname // required config
 };
@@ -33,6 +36,9 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
    swaggerExpress.register(app);
 
    var port = process.env.PORT || 10010;
+
+   // Instantiate Bunyan logger
+   bunyan.instantiateLogger();
 
    // Connect to MongoDB first and then listen for requests
    createConnection(port);
