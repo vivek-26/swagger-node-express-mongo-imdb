@@ -6,7 +6,8 @@ var mongodb = require('./db/mongo');
 module.exports = app; // for testing
 
 // Swagger UI
-var swaggerUi = require('swagger-tools/middleware/swagger-ui');
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('./api/swagger/swagger.json');
 
 // UUID Timestamp
 var uuidTimestamp = require('uuid/v1');
@@ -24,7 +25,7 @@ SwaggerExpress.create(config, function (err, swaggerExpress) {
    }
 
    // Serve the Swagger documents and Swagger UI
-   app.use(swaggerUi(swaggerExpress.runner.swagger));
+   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, true));
 
    // Middleware to UUID Timestamp to Express Request Object
    app.use(function (req, res, next) {
