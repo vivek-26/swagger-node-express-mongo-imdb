@@ -7,7 +7,6 @@ module.exports = app; // for testing
 
 // Swagger UI
 const swaggerUI = require('swagger-ui-express');
-const swaggerDocument = require('./api/swagger/swagger.json');
 
 // UUID Timestamp
 var uuidTimestamp = require('uuid/v1');
@@ -15,34 +14,45 @@ var uuidTimestamp = require('uuid/v1');
 // Bunyan Logger
 var bunyan = require('./logger/bunyan');
 
+// Swagger Doc Generator
+var swaggerSpecGenerator = require('./swagger-doc-generator/generator').swaggerSpec;
+
 var config = {
    appRoot: __dirname // required config
 };
 
-SwaggerExpress.create(config, function (err, swaggerExpress) {
+swaggerSpecGenerator(function (err, status) {
    if (err) {
-      throw err;
+      console.error(`Failed to generate swagger doc, Error: ${err}`);
+      process.exit(1);
    }
+   
+   SwaggerExpress.create(config, function (err, swaggerExpress) {
+      if (err) {
+         throw err;
+      }
 
-   // Serve the Swagger documents and Swagger UI
-   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, true));
+      // Serve the Swagger documents and Swagger UI
+      const swaggerDocument = require('./api/swagger/swagger.json');
+      app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, true));
 
-   // Middleware to UUID Timestamp to Express Request Object
-   app.use(function (req, res, next) {
-      req.uuidTimestamp = uuidTimestamp();
-      next();
+      // Middleware to UUID Timestamp to Express Request Object
+      app.use(function (req, res, next) {
+         req.uuidTimestamp = uuidTimestamp();
+         next();
+      });
+
+      // install middleware
+      swaggerExpress.register(app);
+
+      var port = process.env.PORT || 10010;
+
+      // Instantiate Bunyan logger
+      bunyan.instantiateLogger();
+
+      // Connect to MongoDB first and then listen for requests
+      createConnection(port);
    });
-
-   // install middleware
-   swaggerExpress.register(app);
-
-   var port = process.env.PORT || 10010;
-
-   // Instantiate Bunyan logger
-   bunyan.instantiateLogger();
-
-   // Connect to MongoDB first and then listen for requests
-   createConnection(port);
 });
 
 /**

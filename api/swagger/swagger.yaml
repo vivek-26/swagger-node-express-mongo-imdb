@@ -1,134 +1,90 @@
 swagger: '2.0'
-info:
-  version: 0.0.1
-  title: Movies/TV API
-host: 'localhost:10010'
+info: {version: 0.0.1, title: Movies/TV API}
+host: localhost:10010
 basePath: /v1
-schemes:
-  - http
-  - https
+schemes: [http, https]
 paths:
-  '/movie/{movieID}':
+  /swagger: {x-swagger-pipe: swagger_raw}
+  /movie/{movieID}:
     x-swagger-router-controller: getMovieById
     get:
       summary: GET MOVIE DETAILS BY ID
-      tags:
-        - Movies
-      produces:
-        - application/json
+      tags: [Movies]
+      produces: [application/json]
       operationId: fetchMovieById
       parameters:
-        - in: path
-          name: movieID
-          type: string
-          required: true
-          description: ID of the featured movie to get
+      - {in: path, name: movieID, type: string, required: true, description: ID of
+          the featured movie to get}
       responses:
         '200':
           description: Movie Details
-          schema:
-            $ref: '#/definitions/MovieDetailsByID'
+          schema: {$ref: '#/definitions/MovieDetailsByID'}
         '404':
           description: A movie with the specified ID was not found!
-          schema:
-            $ref: '#/definitions/Error'
+          schema: {$ref: '#/definitions/Error'}
         default:
           description: Unexpected error occured!
-          schema:
-            $ref: '#/definitions/Error'
-  /swagger:
-    x-swagger-pipe: swagger_raw
+          schema: {$ref: '#/definitions/Error'}
 definitions:
+  Error:
+    type: object
+    properties:
+      error: {type: string, description: Error description in detail}
   MovieDetailsByID:
     type: object
-    required:
-      - _id
-      - MovieID
-      - SeriesType
-      - Genres
-      - RunningTime
+    required: [_id, MovieID, SeriesType, Genres, RunningTime]
     properties:
-      _id:
-        type: string
-      MovieID:
-        type: string
-      SeriesID:
-        type: string
-      SeriesType:
-        type: string
-      SeriesEndYear:
-        type: string
-      ReleaseYear:
-        type: string
+      _id: {type: string}
+      MovieID: {type: string}
+      SeriesID: {type: string}
+      SeriesType: {type: string}
+      SeriesEndYear: {type: string}
+      ReleaseYear: {type: string}
       AltTitles:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Business:
         type: object
         properties:
-          Budget:
-            type: string
-          BudgetCurrency:
-            type: string
-          HighGBO:
-            type: string
-          HighGBOCountry:
-            type: string
-          HighGBOCurrency:
-            type: string
+          Budget: {type: string}
+          BudgetCurrency: {type: string}
+          HighGBO: {type: string}
+          HighGBOCountry: {type: string}
+          HighGBOCurrency: {type: string}
       Parental:
         type: object
         properties:
           Certificates:
             type: array
-            items:
-              type: string
+            items: {type: string}
       Technical:
         type: object
         properties:
           Colors:
             type: array
-            items:
-              type: string
+            items: {type: string}
           Sounds:
             type: array
-            items:
-              type: string
+            items: {type: string}
       Countries:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Genres:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Keywords:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Languages:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Locations:
         type: array
-        items:
-          type: string
+        items: {type: string}
       Rating:
         type: object
         properties:
-          RatingDist:
-            type: string
-          Rating:
-            type: string
-          RatingVotes:
-            type: string
-      RunningTime:
-        type: string
-  Error:
-    type: object
-    properties:
-      error:
-        type: string
-        description: Error description in detail
+          RatingDist: {type: string}
+          Rating: {type: string}
+          RatingVotes: {type: string}
+      RunningTime: {type: string}

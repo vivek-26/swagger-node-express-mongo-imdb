@@ -1,0 +1,13 @@
+swagger: '2.0'
+info:
+  version: 0.0.1
+  title: Movies/TV API
+host: 'localhost:10010'
+basePath: /v1
+schemes:
+  - http
+  - https
+paths: # placeholder for all paths
+  /swagger:
+    x-swagger-pipe: swagger_raw
+definitions: # placeholder for all definitions

@@ -11,6 +11,9 @@
       "https"
    ],
    "paths": {
+      "/swagger": {
+         "x-swagger-pipe": "swagger_raw"
+      },
       "/movie/{movieID}": {
          "x-swagger-router-controller": "getMovieById",
          "get": {
@@ -52,9 +55,6 @@
                }
             }
          }
-      },
-      "/swagger": {
-         "x-swagger-pipe": "swagger_raw"
       }
    },
    "definitions": {

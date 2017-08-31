@@ -19,11 +19,14 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "express": "^4.12.3",
+    "extendify": "^1.0.0",
+    "glob": "^7.1.2",
     "mongodb": "^2.2.31",
+    "promisify-node": "^0.4.0",
     "swagger-express-mw": "^0.1.0",
     "swagger-ui-express": "^2.0.6",
     "uuid": "^3.1.0",
-    "yamljs": "^0.3.0"
+    "yaml-js": "^0.2.0"
   },
   "devDependencies": {
     "should": "^7.1.0",

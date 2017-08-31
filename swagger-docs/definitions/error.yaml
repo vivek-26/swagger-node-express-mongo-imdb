@@ -1,0 +1,7 @@
+definitions:
+  Error:
+    type: object
+    properties:
+      error:
+        type: string
+        description: Error description in detail

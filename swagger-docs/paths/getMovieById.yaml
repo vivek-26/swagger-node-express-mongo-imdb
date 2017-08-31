@@ -1,0 +1,29 @@
+paths:
+  '/movie/{movieID}':
+    x-swagger-router-controller: getMovieById
+    get:
+      summary: GET MOVIE DETAILS BY ID
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchMovieById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the featured movie to get
+      responses:
+        '200':
+          description: Movie Details
+          schema:
+            $ref: '#/definitions/MovieDetailsByID'
+        '404':
+          description: A movie with the specified ID was not found!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
