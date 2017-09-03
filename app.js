@@ -17,6 +17,16 @@ var bunyan = require('./logger/bunyan');
 // Swagger Doc Generator
 var swaggerSpecGenerator = require('./swagger-doc-generator/generator').swaggerSpec;
 
+// Rate Limiter
+var RateLimit = require('express-rate-limit');
+// app.enable('trust proxy'); // Used only when behind a reverse proxy, eg: Heroku
+var apiLimiter = new RateLimit({
+   windowMs: 15 * 60 * 1000, // 15 minutes
+   delayMs: 0, // disabled 
+   max: 100, // limit each IP to 100 requests per windowMs
+   message: 'Too many requests from this IP, Please try again later!'
+});
+
 var config = {
    appRoot: __dirname // required config
 };
@@ -26,7 +36,7 @@ swaggerSpecGenerator(function (err, status) {
       console.error(`Failed to generate swagger doc, Error: ${err}`);
       process.exit(1);
    }
-   
+
    SwaggerExpress.create(config, function (err, swaggerExpress) {
       if (err) {
          throw err;
@@ -41,6 +51,9 @@ swaggerSpecGenerator(function (err, status) {
          req.uuidTimestamp = uuidTimestamp();
          next();
       });
+
+      // Rate limiter middleware
+      app.use(apiLimiter);
 
       // install middleware
       swaggerExpress.register(app);

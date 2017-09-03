@@ -22,6 +22,9 @@ paths:
         '404':
           description: A movie with the specified ID was not found!
           schema: {$ref: '#/definitions/Error'}
+        '429':
+          description: Too many requests!
+          schema: {$ref: '#/definitions/Error'}
         default:
           description: Unexpected error occured!
           schema: {$ref: '#/definitions/Error'}
@@ -29,7 +32,7 @@ definitions:
   Error:
     type: object
     properties:
-      error: {type: string, description: Error description in detail}
+      message: {type: string, description: Error description in detail}
   MovieDetailsByID:
     type: object
     required: [_id, MovieID, SeriesType, Genres, RunningTime]

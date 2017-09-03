@@ -2,6 +2,6 @@ definitions:
   Error:
     type: object
     properties:
-      error:
+      message:
         type: string
         description: Error description in detail

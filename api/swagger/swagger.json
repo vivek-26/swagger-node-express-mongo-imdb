@@ -47,6 +47,12 @@
                      "$ref": "#/definitions/Error"
                   }
                },
+               "429": {
+                  "description": "Too many requests!",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               },
                "default": {
                   "description": "Unexpected error occured!",
                   "schema": {
@@ -61,7 +67,7 @@
       "Error": {
          "type": "object",
          "properties": {
-            "error": {
+            "message": {
                "type": "string",
                "description": "Error description in detail"
             }

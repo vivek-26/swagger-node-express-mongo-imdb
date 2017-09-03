@@ -23,6 +23,10 @@ paths:
           description: A movie with the specified ID was not found!
           schema:
             $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
         default:
           description: Unexpected error occured!
           schema:
