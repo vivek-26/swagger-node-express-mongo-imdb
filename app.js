@@ -33,7 +33,7 @@ var config = {
 
 swaggerSpecGenerator(function (err, status) {
    if (err) {
-      console.error(`Failed to generate swagger doc, Error: ${err}`);
+      console.error(`Failed to generate swagger doc, ${err}`);
       process.exit(1);
    }
 
