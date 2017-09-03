@@ -1,0 +1,10 @@
+definitions:
+  MovieListByGenre:
+    type: object
+    required:
+      - movieList
+    properties:
+      movieList:
+        type: array
+        items:
+          type: string

@@ -28,6 +28,29 @@ paths:
         default:
           description: Unexpected error occured!
           schema: {$ref: '#/definitions/Error'}
+  /movie/list/{genre}:
+    x-swagger-router-controller: getMovieListByGenre
+    get:
+      summary: GET A LIST OF MOVIES BY GENRE
+      tags: [Movies]
+      produces: [application/json]
+      operationId: fetchMovieListByGenre
+      parameters:
+      - {in: path, name: genre, type: string, required: true, description: Genre of
+          the movie. eg - Action}
+      responses:
+        '200':
+          description: Movies list for a specified genre
+          schema: {$ref: '#/definitions/MovieListByGenre'}
+        '404':
+          description: Movies for specified genre was not found!
+          schema: {$ref: '#/definitions/Error'}
+        '429':
+          description: Too many requests!
+          schema: {$ref: '#/definitions/Error'}
+        default:
+          description: Unexpected error occured!
+          schema: {$ref: '#/definitions/Error'}
 definitions:
   Error:
     type: object
@@ -91,3 +114,10 @@ definitions:
           Rating: {type: string}
           RatingVotes: {type: string}
       RunningTime: {type: string}
+  MovieListByGenre:
+    type: object
+    required: [movieList]
+    properties:
+      movieList:
+        type: array
+        items: {type: string}

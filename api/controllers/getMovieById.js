@@ -69,6 +69,7 @@ async function fetchMovie(id_route, movieID, callback) {
    }
 };
 
+// Export route handler
 module.exports = {
    fetchMovieById
 };
