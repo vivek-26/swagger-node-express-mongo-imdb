@@ -27,6 +27,13 @@ var apiLimiter = new RateLimit({
    message: 'Too many requests from this IP, Please try again later!'
 });
 
+// Read key and cert
+var fs = require('fs');
+var httpsConfig = {
+   key: fs.readFileSync('./certs/key.pem'),
+   cert: fs.readFileSync('./certs/cert.pem')
+};
+
 var config = {
    appRoot: __dirname // required config
 };
@@ -79,7 +86,8 @@ async function createConnection(port) {
       console.error('Failed to connect to MongoDB instance');
       process.exit(1);
    } else {
-      app.listen(port);
-      console.info('server started on port: ', port);
+      require('https').createServer(httpsConfig, app).listen(port, function () {
+         console.info('server started on port: ', port);
+      });
    }
 };
