@@ -33,6 +33,15 @@ function fetchMovieListByGenre(req, res) {
    });
 };
 
+/**
+ * @function @name fetchMovieList
+ * @description Fetch a list of movies by Genre, Supports Pagination
+ * @param {object} id_route Object containing unique request identifier and route info
+ * @param {string} genre Genre of movie
+ * @param {integer} pageNumber Page number 
+ * @param {integer} numOfRecords Number of records to be fetched
+ * @param {function (err, movie)} callback 
+ */
 async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callback) {
    let logger = bunyan.getLogger();
    try {

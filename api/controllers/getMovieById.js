@@ -34,6 +34,7 @@ function fetchMovieById(req, res) {
 /**
  * @function fetchMovie
  * @description Helper function for @function fetchMovieById
+ * @param {object} id_route Object containing unique request identifier and route info
  * @param {string} movieID ID of the movie to get
  * @param {function (err, movie)} callback
  */
