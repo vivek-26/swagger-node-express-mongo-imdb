@@ -19,7 +19,7 @@ definitions:
       SeriesEndYear:
         type: string
       ReleaseYear:
-        type: string
+        type: integer
       AltTitles:
         type: array
         items:
@@ -83,6 +83,6 @@ definitions:
           Rating:
             type: string
           RatingVotes:
-            type: string
+            type: integer
       RunningTime:
         type: string

@@ -147,7 +147,7 @@
                "type": "string"
             },
             "ReleaseYear": {
-               "type": "string"
+               "type": "integer"
             },
             "AltTitles": {
                "type": "array",
@@ -243,7 +243,7 @@
                      "type": "string"
                   },
                   "RatingVotes": {
-                     "type": "string"
+                     "type": "integer"
                   }
                }
             },

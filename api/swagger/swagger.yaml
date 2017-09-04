@@ -65,7 +65,7 @@ definitions:
       SeriesID: {type: string}
       SeriesType: {type: string}
       SeriesEndYear: {type: string}
-      ReleaseYear: {type: string}
+      ReleaseYear: {type: integer}
       AltTitles:
         type: array
         items: {type: string}
@@ -112,7 +112,7 @@ definitions:
         properties:
           RatingDist: {type: string}
           Rating: {type: string}
-          RatingVotes: {type: string}
+          RatingVotes: {type: integer}
       RunningTime: {type: string}
   MovieListByGenre:
     type: object
