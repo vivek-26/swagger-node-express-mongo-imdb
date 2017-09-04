@@ -80,6 +80,20 @@
                   "type": "string",
                   "required": true,
                   "description": "Genre of the movie. eg - Action"
+               },
+               {
+                  "in": "query",
+                  "name": "page",
+                  "type": "integer",
+                  "required": false,
+                  "description": "Page number. Default is 1"
+               },
+               {
+                  "in": "query",
+                  "name": "count",
+                  "type": "integer",
+                  "required": false,
+                  "description": "Number of records to return in a page. Default is 10"
                }
             ],
             "responses": {
@@ -253,15 +267,20 @@
          }
       },
       "MovieListByGenre": {
-         "type": "object",
-         "required": [
-            "movieList"
-         ],
-         "properties": {
-            "movieList": {
-               "type": "array",
-               "items": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "MovieID": {
                   "type": "string"
+               },
+               "Rating": {
+                  "type": "object",
+                  "properties": {
+                     "Rating": {
+                        "type": "string"
+                     }
+                  }
                }
             }
          }

@@ -14,6 +14,16 @@ paths:
           type: string
           required: true
           description: Genre of the movie. eg - Action
+        - in: query
+          name: page
+          type: integer
+          required: false
+          description: Page number. Default is 1
+        - in: query
+          name: count
+          type: integer
+          required: false
+          description: Number of records to return in a page. Default is 10
       responses:
         '200':
           description: Movies list for a specified genre

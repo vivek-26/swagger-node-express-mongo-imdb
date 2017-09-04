@@ -1,10 +1,13 @@
 definitions:
   MovieListByGenre:
-    type: object
-    required:
-      - movieList
-    properties:
-      movieList:
-        type: array
-        items:
+    type: array
+    items:
+      type: object
+      properties:
+        MovieID:
           type: string
+        Rating:
+          type: object
+          properties:
+            Rating:
+              type: string
