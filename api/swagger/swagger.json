@@ -99,7 +99,7 @@
                "200": {
                   "description": "Movies list for a specified genre",
                   "schema": {
-                     "$ref": "#/definitions/MovieListByGenre"
+                     "$ref": "#/definitions/MovieList"
                   }
                },
                "404": {
@@ -265,7 +265,7 @@
             }
          }
       },
-      "MovieListByGenre": {
+      "MovieList": {
          "type": "array",
          "items": {
             "type": "object",
