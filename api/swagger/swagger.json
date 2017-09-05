@@ -122,6 +122,68 @@
                }
             }
          }
+      },
+      "/search/{type}": {
+         "x-swagger-router-controller": "search",
+         "get": {
+            "summary": "GET A LIST OF MOVIES WHICH MATCH SEARCH STRING",
+            "tags": [
+               "Search"
+            ],
+            "produces": [
+               "application/json"
+            ],
+            "operationId": "search",
+            "parameters": [
+               {
+                  "in": "path",
+                  "name": "type",
+                  "type": "string",
+                  "required": true,
+                  "description": "Valid values are - 'movie' for searching Movies & 'tv' for TV Series"
+               },
+               {
+                  "in": "query",
+                  "name": "name",
+                  "type": "string",
+                  "required": true,
+                  "description": "Name of the Movie/TV Series"
+               },
+               {
+                  "in": "query",
+                  "name": "limit",
+                  "type": "integer",
+                  "required": false,
+                  "description": "Number of records to return for a search operation. Default is 10"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Movies list for a specified genre",
+                  "schema": {
+                     "$ref": "#/definitions/MovieList"
+                  }
+               },
+               "404": {
+                  "description": "Movies for specified genre was not found!",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               },
+               "429": {
+                  "description": "Too many requests!",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               },
+               "default": {
+                  "description": "Unexpected error occured!",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               }
+            }
+         }
       }
    },
    "definitions": {
