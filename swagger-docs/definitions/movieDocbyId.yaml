@@ -1,0 +1,12 @@
+definitions:
+  MovieDocByID:
+    type: array
+    items:
+      type: object
+      properties:
+        DocText:
+          type: string
+        DocSubtype:
+          type: string
+        DocAuthor:
+          type: string

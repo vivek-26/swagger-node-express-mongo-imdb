@@ -1,0 +1,38 @@
+paths:
+  '/movie/{movieID}/getMovieDoc':
+    x-swagger-router-controller: getMovieDocById
+    get:
+      summary: GET MOVIE DOCS BY ID
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchMovieDocById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the featured movie whose doc(s) has to be fetched
+        - in: query
+          name: type
+          type: string
+          required: true
+          description: Type of Movie Doc to be fetched.
+      responses:
+        '200':
+          description: Movie Docs
+          schema:
+            $ref: '#/definitions/MovieDocByID'
+        '404':
+          description: A movie with the specified ID was not found!
+          schema:
+            $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
