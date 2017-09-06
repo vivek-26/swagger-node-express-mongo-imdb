@@ -24,7 +24,7 @@ function fetchMovieById(req, res) {
    fetchMovie(id_route, movieID, function (err, movie) {
       if (err) {
          return res.status(err.statusCode).json({
-            error: err.message
+            message: err.message
          });
       }
       return res.json(movie);

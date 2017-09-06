@@ -15,16 +15,17 @@ var bunyan = require('./../../logger/bunyan');
  */
 function search(req, res) {
    let type = req.swagger.params.type.value;
+   let searchStr = req.swagger.params.name.value;
    if (type == 'movie') {
       type = 'F';
    } else if (type == 'tv') {
       type = 'S';
+      searchStr = `"${searchStr}`
    } else {
       return res.status(404).json({
          message: `${type} is not a valid value!`
       });
    }
-   let searchStr = req.swagger.params.name.value;
    let limit = req.swagger.params.limit.value || 10;
    let logger = bunyan.getLogger(),
       id_route = {

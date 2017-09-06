@@ -26,7 +26,7 @@ function fetchMovieListByGenre(req, res) {
    fetchMovieList(id_route, genre, pageNumber, numOfRecords, function (err, movieList) {
       if (err) {
          return res.status(err.statusCode).json({
-            error: err.message
+            message: err.message
          });
       }
       return res.json(movieList);
