@@ -1,0 +1,33 @@
+paths:
+  '/movie/{movieID}/getTopBilledCast':
+    x-swagger-router-controller: getTopBilledCastById
+    get:
+      summary: GET TOP BILLED CAST BY MOVIE ID
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchTopBilledCastById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the featured movie whose top billed cast has to be fetched
+      responses:
+        '200':
+          description: Top 5 Billed Cast
+          schema:
+            $ref: '#/definitions/TopBilledCast'
+        '404':
+          description: A movie with the specified ID was not found!
+          schema:
+            $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'

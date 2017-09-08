@@ -1,0 +1,12 @@
+definitions:
+  TopBilledCast:
+    type: array
+    items:
+      type: object
+      properties:
+        ContribName:
+          type: string
+        ContribClass:
+          type: string
+        ContribRole:
+          type: string
