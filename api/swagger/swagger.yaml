@@ -2,7 +2,7 @@ swagger: '2.0'
 info: {version: 0.0.1, title: Movies/TV API}
 host: localhost:10010
 basePath: /v1
-schemes: [https]
+schemes: [http, https]
 paths:
   /swagger: {x-swagger-pipe: swagger_raw}
   /movie/{movieID}:

@@ -9,7 +9,8 @@ var dbConfig = require('./config');
 var _db;
 
 // Connection URL
-var connectionURL = `mongodb://${dbConfig.username}:${dbConfig.password}` +
+var connectionURL = process.env.MONGODB_URI ||
+   `mongodb://${dbConfig.username}:${dbConfig.password}` +
    `@${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`;
 // console.info('connectionURL', connectionURL);
 

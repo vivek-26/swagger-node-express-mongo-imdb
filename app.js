@@ -19,7 +19,7 @@ var swaggerSpecGenerator = require('./swagger-doc-generator/generator').swaggerS
 
 // Rate Limiter
 var RateLimit = require('express-rate-limit');
-// app.enable('trust proxy'); // Used only when behind a reverse proxy, eg: Heroku
+app.enable('trust proxy'); // Used only when behind a reverse proxy, eg: Heroku
 var apiLimiter = new RateLimit({
    windowMs: 15 * 60 * 1000, // 15 minutes
    delayMs: 0, // disabled 
@@ -27,12 +27,12 @@ var apiLimiter = new RateLimit({
    message: 'Too many requests from this IP, Please try again later!'
 });
 
-// Read key and cert
-var fs = require('fs');
-var httpsConfig = {
-   key: fs.readFileSync('./certs/key.pem'),
-   cert: fs.readFileSync('./certs/cert.pem')
-};
+// Read key and cert - Not required, Heroku has SSL Termination
+// var fs = require('fs');
+// var httpsConfig = {
+//    key: fs.readFileSync('./certs/key.pem'),
+//    cert: fs.readFileSync('./certs/cert.pem')
+// };
 
 var config = {
    appRoot: __dirname // required config
@@ -98,8 +98,13 @@ async function createConnection(port) {
       console.error('Failed to connect to MongoDB instance');
       process.exit(1);
    } else {
-      require('https').createServer(httpsConfig, app).listen(port, function () {
-         console.info('server started on port: ', port);
-      });
+      // require('https').createServer(httpsConfig, app).listen(port, function () {
+      //    console.info('server started on port: ', port);
+      // });
+      /**
+       * HTTPS is not required as SSL Termination is done on Heroku
+       */
+      app.listen(port);
+      console.info('server started on port: ', port);
    }
 };
