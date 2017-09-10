@@ -65,6 +65,13 @@ swaggerSpecGenerator(function (err, status) {
       // install middleware
       swaggerExpress.register(app);
 
+      // Global error handling middleware
+      app.use(function (err, req, res, next) {
+         return res.status(500).json({
+            message: err.message
+         });
+      });
+
       var port = process.env.PORT || 10010;
 
       // Instantiate Bunyan logger
