@@ -3,7 +3,7 @@
  * Module Dependencies
  */
 var mongoClient = require('mongodb').MongoClient;
-var dbConfig = require('./config');
+var dbConfig = process.env.MONGODB_URI || require('./config');
 
 // Global variable for MongoDB Instance
 var _db;
