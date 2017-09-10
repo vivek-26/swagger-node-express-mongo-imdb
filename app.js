@@ -62,6 +62,11 @@ swaggerSpecGenerator(function (err, status) {
       // Rate limiter middleware
       app.use(apiLimiter);
 
+      // Redirect to docs page when root dir is requested
+      app.get('/', function (req, res) {
+         res.status(302).redirect('/api-docs/');
+      });
+
       // install middleware
       swaggerExpress.register(app);
 
