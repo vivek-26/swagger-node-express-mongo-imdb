@@ -19,7 +19,9 @@ var swaggerSpecGenerator = require('./swagger-doc-generator/generator').swaggerS
 
 // Rate Limiter
 var RateLimit = require('express-rate-limit');
-app.enable('trust proxy'); // Used only when behind a reverse proxy, eg: Heroku
+if (process.env.NODE_ENV === 'production') {
+   app.enable('trust proxy'); // Used only when behind a reverse proxy, eg: Heroku
+}
 var apiLimiter = new RateLimit({
    windowMs: 15 * 60 * 1000, // 15 minutes
    delayMs: 0, // disabled 
@@ -49,8 +51,13 @@ swaggerSpecGenerator(function (err, status) {
          throw err;
       }
 
+      var port = process.env.PORT || 10010;
+
       // Serve the Swagger documents and Swagger UI
-      const swaggerDocument = require('./api/swagger/swagger.json');
+      var swaggerDocument = require('./api/swagger/swagger.json');
+      if (process.env.NODE_ENV === 'production') {
+         swaggerDocument.host = `imdb-swagger.herokuapp.com:${port}`
+      }
       app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, true));
 
       // Middleware to UUID Timestamp to Express Request Object
@@ -76,8 +83,6 @@ swaggerSpecGenerator(function (err, status) {
             message: err.message
          });
       });
-
-      var port = process.env.PORT || 10010;
 
       // Instantiate Bunyan logger
       bunyan.instantiateLogger();
