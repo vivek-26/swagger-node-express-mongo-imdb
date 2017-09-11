@@ -5,8 +5,8 @@ info:
 host: 'localhost:10010'
 basePath: /v1
 schemes:
-  - https
   - http
+  - https
 paths: # placeholder for all paths
   /swagger:
     x-swagger-pipe: swagger_raw
