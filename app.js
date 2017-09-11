@@ -56,7 +56,7 @@ swaggerSpecGenerator(function (err, status) {
       // Serve the Swagger documents and Swagger UI
       var swaggerDocument = require('./api/swagger/swagger.json');
       if (process.env.NODE_ENV === 'production') {
-         swaggerDocument.host = `imdb-swagger.herokuapp.com:${port}`
+         swaggerDocument.host = `imdb-swagger.herokuapp.com`
       }
       app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, true));
 
