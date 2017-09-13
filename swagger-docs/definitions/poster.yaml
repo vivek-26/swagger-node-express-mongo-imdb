@@ -1,0 +1,6 @@
+definitions:
+  Poster:
+    type: object
+    properties:
+      image_url:
+        type: string

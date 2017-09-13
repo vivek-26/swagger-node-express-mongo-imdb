@@ -1,0 +1,38 @@
+paths:
+  '/movie/{movieID}/getMoviePoster':
+    x-swagger-router-controller: getMoviePosterById
+    get:
+      summary: GET MOVIE POSTER BY MOVIE ID (WRAPPER AROUND TMDB)
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchMoviePosterById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the featured movie whose poster has to be fetched
+        - in: query
+          name: device
+          type: string
+          required: true
+          description: Type of device for which poster has to be fetched (desktop/mobile)
+      responses:
+        '200':
+          description: Movie Poster Image URL
+          schema:
+            $ref: '#/definitions/Poster'
+        '404':
+          description: Cannot find any poster for specified movie!
+          schema:
+            $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
