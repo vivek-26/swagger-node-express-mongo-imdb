@@ -63,7 +63,7 @@ async function fetchDocs(id_route, movieID, docType, callback) {
       } else {
          logger.error(id_route, `Could not find any document(s) of type '${docType}' for '${movieID}'!`);
          return callback({
-            statusCode: 500,
+            statusCode: 404,
             message: `Could not find any document(s) of type '${docType}' for '${movieID}'!`
          });
       }

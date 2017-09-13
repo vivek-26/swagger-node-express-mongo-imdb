@@ -71,7 +71,7 @@ async function fetchTopBilledCast(id_route, movieID, callback) {
       } else {
          logger.error(id_route, `Could not find billed cast for Movie: '${movieID}'!`);
          return callback({
-            statusCode: 500,
+            statusCode: 404,
             message: `Could not find billed cast for Movie: '${movieID}'!`
          });
       }

@@ -84,7 +84,7 @@ async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callbac
       } else {
          logger.error(id_route, `Could not fetch a list of movies for Genre: ${genre}`);
          return callback({
-            statusCode: 500,
+            statusCode: 404,
             message: `Could not get movie list for genre ${genre}`
          });
       }

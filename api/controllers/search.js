@@ -88,7 +88,7 @@ async function fetchMovieListBySearchString(id_route, type, searchStr, limit, ca
       } else {
          logger.error(id_route, `Could not find any suggestion for '${searchStr}'!`);
          return callback({
-            statusCode: 500,
+            statusCode: 404,
             message: `Could not find any suggestion for '${searchStr}'!`
          });
       }
