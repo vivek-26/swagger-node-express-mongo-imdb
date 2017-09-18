@@ -2,9 +2,34 @@ swagger: '2.0'
 info: {version: 0.0.1, title: Movies/TV API}
 host: localhost:10010
 basePath: /v1
-schemes: [http, https]
+schemes: [https, http]
 paths:
   /swagger: {x-swagger-pipe: swagger_raw}
+  /movie/{movieID}/getCrewInfo:
+    x-swagger-router-controller: getCrewInfoById
+    get:
+      summary: GET CREW MEMBER INFO BY MOVIE ID
+      tags: [Movies]
+      produces: [application/json]
+      operationId: fetchCrewInfoById
+      parameters:
+      - {in: path, name: movieID, type: string, required: true, description: ID of
+          the featured movie}
+      - {in: query, name: role, type: string, required: true, description: 'Crew member''s
+          role. eg - ''directors'', ''producers'', ''writers'''}
+      responses:
+        '200':
+          description: Crew Members Details
+          schema: {$ref: '#/definitions/CrewMembersDetail'}
+        '404':
+          description: A movie with the specified ID was not found!
+          schema: {$ref: '#/definitions/Error'}
+        '429':
+          description: Too many requests!
+          schema: {$ref: '#/definitions/Error'}
+        default:
+          description: Unexpected error occured!
+          schema: {$ref: '#/definitions/Error'}
   /movie/{movieID}:
     x-swagger-router-controller: getMovieById
     get:
@@ -80,6 +105,31 @@ paths:
         default:
           description: Unexpected error occured!
           schema: {$ref: '#/definitions/Error'}
+  /movie/{movieID}/getMoviePoster:
+    x-swagger-router-controller: getMoviePosterById
+    get:
+      summary: GET MOVIE POSTER BY MOVIE ID (WRAPPER AROUND TMDB)
+      tags: [Movies]
+      produces: [application/json]
+      operationId: fetchMoviePosterById
+      parameters:
+      - {in: path, name: movieID, type: string, required: true, description: ID of
+          the featured movie whose poster has to be fetched}
+      - {in: query, name: device, type: string, required: true, description: Type
+          of device for which poster has to be fetched (desktop/mobile)}
+      responses:
+        '200':
+          description: Movie Poster Image URL
+          schema: {$ref: '#/definitions/Poster'}
+        '404':
+          description: Cannot find any poster for specified movie!
+          schema: {$ref: '#/definitions/Error'}
+        '429':
+          description: Too many requests!
+          schema: {$ref: '#/definitions/Error'}
+        default:
+          description: Unexpected error occured!
+          schema: {$ref: '#/definitions/Error'}
   /movie/{movieID}/getTopBilledCast:
     x-swagger-router-controller: getTopBilledCastById
     get:
@@ -131,6 +181,13 @@ paths:
           description: Unexpected error occured!
           schema: {$ref: '#/definitions/Error'}
 definitions:
+  CrewMembersDetail:
+    type: array
+    items:
+      type: object
+      properties:
+        ContribName: {type: string}
+        ContribRoleDetail: {type: string}
   Error:
     type: object
     properties:
@@ -211,6 +268,10 @@ definitions:
           type: object
           properties:
             Rating: {type: string}
+  Poster:
+    type: object
+    properties:
+      image_url: {type: string}
   TopBilledCast:
     type: array
     items:

@@ -1,0 +1,10 @@
+definitions:
+  CrewMembersDetail:
+    type: array
+    items:
+      type: object
+      properties:
+        ContribName:
+          type: string
+        ContribRoleDetail:
+          type: string

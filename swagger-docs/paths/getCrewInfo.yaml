@@ -1,0 +1,38 @@
+paths:
+  '/movie/{movieID}/getCrewInfo':
+    x-swagger-router-controller: getCrewInfoById
+    get:
+      summary: GET CREW MEMBER INFO BY MOVIE ID
+      tags:
+        - Movies
+      produces:
+        - application/json
+      operationId: fetchCrewInfoById
+      parameters:
+        - in: path
+          name: movieID
+          type: string
+          required: true
+          description: ID of the featured movie
+        - in: query
+          name: role
+          type: string
+          required: true
+          description: Crew member's role. eg - 'directors', 'producers', 'writers'
+      responses:
+        '200':
+          description: Crew Members Details
+          schema:
+            $ref: '#/definitions/CrewMembersDetail'
+        '404':
+          description: A movie with the specified ID was not found!
+          schema:
+            $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
