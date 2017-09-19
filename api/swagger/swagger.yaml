@@ -95,7 +95,7 @@ paths:
       responses:
         '200':
           description: Movies list for a specified genre
-          schema: {$ref: '#/definitions/MovieList'}
+          schema: {$ref: '#/definitions/MovieListByGenre'}
         '404':
           description: Movies for specified genre was not found!
           schema: {$ref: '#/definitions/Error'}
@@ -268,6 +268,20 @@ definitions:
           type: object
           properties:
             Rating: {type: string}
+  MovieListByGenre:
+    type: object
+    properties:
+      total: {type: integer}
+      results:
+        type: array
+        items:
+          type: object
+          properties:
+            MovieID: {type: string}
+            Rating:
+              type: object
+              properties:
+                Rating: {type: string}
   Poster:
     type: object
     properties:

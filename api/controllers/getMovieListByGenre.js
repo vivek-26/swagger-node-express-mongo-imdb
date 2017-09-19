@@ -73,13 +73,27 @@ async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callbac
             'Rating.Rating': 1
          }
       }, {
-         $limit: limit
+         $group: {
+            '_id': null,
+            'total': {
+               '$sum': 1
+            },
+            'results': {
+               '$push': '$$ROOT'
+            }
+         }
       }, {
-         $skip: skip
+         $project: {
+            '_id': 0,
+            'total': 1,
+            'results': {
+               $slice: ['$results', skip, limit]
+            }
+         }
       }]).toArray();
-      if ((Object.prototype.toString.call(movieList) === '[object Array]') &&
-         movieList.length > 0) {
-         logger.info(id_route, `Found ${movieList.length} records for Genre: ${genre}!`);
+      movieList = movieList[0];
+      if (movieList.total > 0) {
+         logger.info(id_route, `Found ${movieList.total} records for Genre: ${genre}!`);
          return callback(null, movieList);
       } else {
          logger.error(id_route, `Could not fetch a list of movies for Genre: ${genre}`);

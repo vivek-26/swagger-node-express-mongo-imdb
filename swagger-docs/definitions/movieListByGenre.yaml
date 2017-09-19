@@ -1,0 +1,18 @@
+definitions:
+  MovieListByGenre:
+    type: object
+    properties:
+      total:
+        type: integer
+      results:
+        type: array
+        items:
+          type: object
+          properties:
+            MovieID:
+              type: string
+            Rating:
+              type: object
+              properties:
+                Rating:
+                  type: string

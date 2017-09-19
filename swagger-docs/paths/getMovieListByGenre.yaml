@@ -28,7 +28,7 @@ paths:
         '200':
           description: Movies list for a specified genre
           schema:
-            $ref: '#/definitions/MovieList'
+            $ref: '#/definitions/MovieListByGenre'
         '404':
           description: Movies for specified genre was not found!
           schema:
