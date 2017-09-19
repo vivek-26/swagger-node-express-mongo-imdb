@@ -48,6 +48,8 @@ async function fetchDocs(id_route, movieID, docType, callback) {
          $and: [{
             'MovieID': movieID
          }, {
+            'SeriesType': 'F'
+         }, {
             'DocType': docType
          }]
       }, {

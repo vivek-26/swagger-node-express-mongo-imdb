@@ -47,6 +47,8 @@ async function fetchTopBilledCast(id_route, movieID, callback) {
             $and: [{
                'MovieID': movieID
             }, {
+               'SeriesType': 'F'
+            }, {
                'ContribRoleDetail': {
                   $in: ['1', '2', '3', '4', '5']
                }

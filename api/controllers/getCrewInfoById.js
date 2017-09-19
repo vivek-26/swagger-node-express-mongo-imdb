@@ -48,6 +48,8 @@ async function fetchCrewInfo(id_route, movieID, role, callback) {
          $and: [{
             'MovieID': movieID
          }, {
+            'SeriesType': 'F'
+         }, {
             'ContribClass': role
          }]
       }, {
