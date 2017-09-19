@@ -47,9 +47,9 @@ function search(req, res) {
  * @function @name fetchMovieListBySearchString
  * @description Helper function for search route
  * @param {object} id_route Object containing unique request identifier and route info
- * @param {*} type Indicates Movie or TV Series
- * @param {*} searchStr The string to be matched 
- * @param {*} limit Number of records to be returned
+ * @param {string} type Indicates Movie or TV Series
+ * @param {string} searchStr The string to be matched 
+ * @param {integer} limit Number of records to be returned
  * @param {function (err, movieList)} callback 
  */
 async function fetchMovieListBySearchString(id_route, type, searchStr, limit, callback) {

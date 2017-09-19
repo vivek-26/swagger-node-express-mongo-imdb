@@ -34,8 +34,8 @@ function fetchTopBilledCastById(req, res) {
 /**
  * @function @name fetchTopBilledCast
  * @description Helper function for @function @name fetchTopBilledCastById
- * @param {*} id_route Object containing unique request identifier and route info
- * @param {*} movieID Unique ID of a movie
+ * @param {object} id_route Object containing unique request identifier and route info
+ * @param {string} movieID Unique ID of a movie
  * @param {function (err, castList)} callback 
  */
 async function fetchTopBilledCast(id_route, movieID, callback) {

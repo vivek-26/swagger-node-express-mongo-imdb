@@ -35,9 +35,9 @@ function fetchCrewInfoById(req, res) {
 /**
  * @function @name fetchCrewInfo
  * @description Helper function for @function @name fetchCrewInfoById
- * @param {*} id_route Object containing unique request identifier and route info 
- * @param {*} movieID Unique IMDB ID of the movie
- * @param {*} role 'directors', 'producers', 'writers'
+ * @param {object} id_route Object containing unique request identifier and route info 
+ * @param {string} movieID Unique IMDB ID of the movie
+ * @param {string} role 'directors', 'producers', 'writers'
  * @param {function (err, crewDetails)} callback 
  */
 async function fetchCrewInfo(id_route, movieID, role, callback) {
