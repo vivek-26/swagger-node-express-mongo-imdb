@@ -1,0 +1,15 @@
+definitions:
+  EpisodeListByID:
+    type: array
+    items:
+      type: object
+      properties:
+        season:
+          type: array
+          items:
+            type: object
+            properties:
+              episodeNumber:
+                type: integer
+              episodeName:
+                type: string

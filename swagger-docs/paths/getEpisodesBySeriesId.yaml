@@ -1,0 +1,33 @@
+paths:
+  '/tv/{seriesID}/getEpisodes':
+    x-swagger-router-controller: getEpisodesBySeriesID
+    get:
+      summary: GET ALL EPISODES OF A SERIES USING SERIES ID
+      tags:
+        - TV
+      produces:
+        - application/json
+      operationId: fetchEpisodesBySeriesID
+      parameters:
+        - in: path
+          name: seriesID
+          type: string
+          required: true
+          description: ID of the Series whose episodes have to be fetched
+      responses:
+        '200':
+          description: Episode List
+          schema:
+            $ref: '#/definitions/EpisodeListByID'
+        '404':
+          description: A series with the specified ID was not found!
+          schema:
+            $ref: '#/definitions/Error'
+        '429':
+          description: Too many requests!
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error occured!
+          schema:
+            $ref: '#/definitions/Error'
