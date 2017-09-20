@@ -92,7 +92,7 @@ async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callbac
          }
       }]).toArray();
       movieList = movieList[0];
-      if (movieList.total > 0) {
+      if (movieList && movieList.total > 0) {
          logger.info(id_route, `Found ${movieList.total} records for Genre: ${genre}!`);
          return callback(null, movieList);
       } else {
