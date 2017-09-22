@@ -53,14 +53,25 @@ async function fetchAllEpisodes(seriesID, id_route, callback) {
 };
 
 async function processEpisodesArray(episodes) {
-   let results = await Promise.all(episodes.map(async(episode) => {
-      return {
-         'episodeName': episode.MovieID
-      };
+   let processedEpisodes = await Promise.all(episodes.map(async(episode) => {
+      return await extractEpisodeData(episode);
    }));
-   console.log('results array', results);
+   console.log('processedEpisodes', processedEpisodes);
    return null;
 };
+
+async function extractEpisodeData(episode) {
+   let episodeId = episode.MovieID.match(/{(.*?)}/)[1];
+   let episodeNS = episodeId.match(/\((.*?)\)/)[1];
+   let episodeName = episodeId.replace(episodeId.match(/\((.*?)\)/)[0], '').trim();
+   let episodeSeason = +episodeNS.split('.')[0].replace('#', '');
+   let episodeNumber = +episodeNS.split('.')[1];
+   return {
+      episodeName,
+      episodeSeason,
+      episodeNumber
+   };
+}
 
 /**
  * Schema
