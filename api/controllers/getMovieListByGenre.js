@@ -46,8 +46,7 @@ async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callbac
    let logger = bunyan.getLogger();
    try {
       let db = mongo.getDBInstance();
-      let limit = pageNumber * numOfRecords,
-         skip = (pageNumber - 1) * numOfRecords;
+      let skip = (pageNumber - 1) * numOfRecords;
       let movieList = await db.collection(MOVIES).aggregate([{
          $match: {
             $and: [{
@@ -87,7 +86,7 @@ async function fetchMovieList(id_route, genre, pageNumber, numOfRecords, callbac
             '_id': 0,
             'total': 1,
             'results': {
-               $slice: ['$results', skip, limit]
+               $slice: ['$results', skip, numOfRecords]
             }
          }
       }]).toArray();
