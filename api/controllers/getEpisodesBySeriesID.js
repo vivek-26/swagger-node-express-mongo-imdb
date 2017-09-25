@@ -59,15 +59,6 @@ async function fetchAllEpisodes(seriesID, id_route, callback) {
          }).toArray();
       let episodeList = await processEpisodesArray(episodes);
       if (episodeList.length > 0) {
-         for (let index in episodeList) {
-            if (!episodeList[index].Episodes.length > 0) {
-               logger.error(id_route, `Could not find episode(s) for season ${(+index) + 1}, Series: ${seriesID}!`);
-               return callback({
-                  statusCode: 404,
-                  message: `Could not find episode(s) for season ${(+index) + 1}, Series: ${seriesID}!`
-               });
-            }
-         }
          logger.info(id_route, `Found episodes for ${episodeList.length} season(s) of Series: ${seriesID}!`);
          return callback(null, episodeList);
       } else {
